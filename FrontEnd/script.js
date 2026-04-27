@@ -2,6 +2,7 @@
     1- Récupérer tous les works
     2- Stock les works
     3- filtres pour afficher les travaux par catégorie
+    4- 
 */
 
 let worksCache
@@ -28,7 +29,7 @@ fetch("http://localhost:5678/api/categories")
     .then(res => res.json())
     .then(data => {
         let buttonHTML = '<button data-id="0">Tous</button>'
-        for (category of data) {
+        for (let category of data) {
             buttonHTML += `<button data-id="${category.id}">${category.name}</button>`
         }
         document.querySelector(".category").insertAdjacentHTML("beforeend", buttonHTML)
@@ -37,8 +38,28 @@ fetch("http://localhost:5678/api/categories")
             button.addEventListener('click', () => {
                 let filterId = button.getAttribute('data-id')
                 filterId = parseInt(filterId)
+
+                filterWorkCategory(filterId) 
                 console.log("Click bouton", filterId)
             })
         })
     })
     .catch(err => console.log(err))
+
+function filterWorkCategory (filterId) {
+    console.log("Filtre les categories", filterId)
+    let display = ''
+    for (let article of worksCache) {
+        /* console.log(work) */
+        if (filterId === article.categoryId || filterId === 0) {
+            display += `
+            <figure>
+                <img src="${article.imageUrl}" alt="${article.title}">
+                <figcaption>${article.title}</figcaption>
+            </figure>`
+        }
+    }
+    const gallery = document.querySelector(".gallery");
+    gallery.innerHTML = ''; // Vide puis réinjecte unic les works filtrés.
+    document.querySelector(".gallery").insertAdjacentHTML('beforeend', display)
+}
