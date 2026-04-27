@@ -24,3 +24,21 @@ fetch("http://localhost:5678/api/works")
     })
     .catch(err => console.log(err))
 
+fetch("http://localhost:5678/api/categories")
+    .then(res => res.json())
+    .then(data => {
+        let buttonHTML = '<button data-id="0">Tous</button>'
+        for (category of data) {
+            buttonHTML += `<button data-id="${category.id}">${category.name}</button>`
+        }
+        document.querySelector(".category").insertAdjacentHTML("beforeend", buttonHTML)
+
+        document.querySelectorAll(".category button").forEach(button => {
+            button.addEventListener('click', () => {
+                let filterId = button.getAttribute('data-id')
+                filterId = parseInt(filterId)
+                console.log("Click bouton", filterId)
+            })
+        })
+    })
+    .catch(err => console.log(err))
