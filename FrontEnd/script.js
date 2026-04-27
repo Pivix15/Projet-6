@@ -29,11 +29,12 @@ fetch("http://localhost:5678/api/categories")
 
         document.querySelectorAll(".category button").forEach(button => {
             button.addEventListener('click', () => {
+                const activeButton = document.querySelector(".category button.active")
+                const filterId = parseInt(button.getAttribute('data-id'))
+                if (activeButton && parseInt(activeButton.getAttribute('data-id')) === filterId) return
+
                 document.querySelectorAll(".category button").forEach(b => b.classList.remove('active'))
                 button.classList.add('active')
-
-                let filterId = button.getAttribute('data-id')
-                filterId = parseInt(filterId)
 
                 filterWorkCategory(filterId) 
                 console.log("Click bouton", filterId)
@@ -55,7 +56,7 @@ function filterWorkCategory (filterId) {
             </figure>`
         }
     }
-    const gallery = document.querySelector(".gallery");
-    gallery.innerHTML = ''; // Vide puis réinjecte unic les works filtrés.
+    const gallery = document.querySelector(".gallery")
+    gallery.innerHTML = '' // Vide puis réinjecte unic les works filtrés.
     document.querySelector(".gallery").insertAdjacentHTML('beforeend', display)
 }
