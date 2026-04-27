@@ -186,3 +186,27 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Zone modifier */
+.category {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 50px;
+	margin-top: 21px;
+}
+
+.category button {
+	font-family: 'Syne';
+	border: 1px solid #1D6154;
+	color: #1D6154;
+	border-radius: 60px;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	padding: 10px 20px;
+}
+
+button.active {
+	background-color: #1D6154;
+	color: white;
+}

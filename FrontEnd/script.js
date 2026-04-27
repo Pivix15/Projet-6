@@ -1,10 +1,3 @@
-/* 
-    1- Récupérer tous les works
-    2- Stock les works
-    3- filtres pour afficher les travaux par catégorie
-    4- 
-*/
-
 let worksCache
 
 fetch("http://localhost:5678/api/works")
@@ -28,7 +21,7 @@ fetch("http://localhost:5678/api/works")
 fetch("http://localhost:5678/api/categories")
     .then(res => res.json())
     .then(data => {
-        let buttonHTML = '<button data-id="0">Tous</button>'
+        let buttonHTML = '<button data-id="0" class="active">Tous</button>'
         for (let category of data) {
             buttonHTML += `<button data-id="${category.id}">${category.name}</button>`
         }
@@ -36,6 +29,9 @@ fetch("http://localhost:5678/api/categories")
 
         document.querySelectorAll(".category button").forEach(button => {
             button.addEventListener('click', () => {
+                document.querySelectorAll(".category button").forEach(b => b.classList.remove('active'))
+                button.classList.add('active')
+
                 let filterId = button.getAttribute('data-id')
                 filterId = parseInt(filterId)
 
