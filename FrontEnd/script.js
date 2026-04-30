@@ -36,7 +36,7 @@ fetch("http://localhost:5678/api/categories")
                 document.querySelectorAll(".category button").forEach(b => b.classList.remove('active'))
                 button.classList.add('active')
 
-                filterWorkCategory(filterId) 
+                filterWorkCategory(filterId)
                 console.log("Click bouton", filterId)
             })
         })
@@ -47,7 +47,7 @@ function filterWorkCategory (filterId) {
     console.log("Filtre les categories", filterId)
     let display = ''
     for (let article of worksCache) {
-        /* console.log(work) */
+        /* console.log(article) */
         if (filterId === article.categoryId || filterId === 0) {
             display += `
             <figure>
