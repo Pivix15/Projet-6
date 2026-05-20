@@ -124,10 +124,10 @@ function openModal() {
                         /* console.log(worksCache) */
                         filterWorkCategory(0)
                     } else {
-                        console.error('Erreur lors de la suppression')
+                        console.log('Erreur lors de la suppression')
                     }
                 })
-                .catch(error => console.error('Erreur réseau :', error))
+                .catch(err => console.log(err))
         })
     })
 }
