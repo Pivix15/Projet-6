@@ -15,9 +15,10 @@
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
+			<li><a href="./index.html">projets</a></li>
 			<li>contact</li>
-			<li>login</li>
+			<li id="login"><a href="./login.html">login</a></li>
+			<li id="logout" style="display: none;">logout</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -25,7 +26,7 @@
 <main>
 	<section id="contact">
 		<h2>Login</h2>
-		<form id="login" action="#" method="post">
+		<form id="form" action="#" method="post">
 			<label for="email">Email</label>
 			<input type="email" name="email" id="email">
 			<label for="name">Mot de passe</label>
@@ -42,6 +43,6 @@
 		</ul>
 	</nav>
 </footer>
-<script src="./test.js"></script>
+<script src="./login.js"></script>
 </body>
 </html>

@@ -60,3 +60,58 @@ function filterWorkCategory (filterId) {
     gallery.innerHTML = '' // Vide puis réinjecte unic les works filtrés.
     document.querySelector(".gallery").insertAdjacentHTML('beforeend', display)
 }
+
+// Zone Login
+document.addEventListener('DOMContentLoaded', function () {
+    const token = localStorage.getItem('token')
+    const loginBtn = document.getElementById("login")
+    const logoutBtn = document.getElementById("logout")
+    const modifier = document.querySelector(".modifier-btn")
+    const category = document.querySelector(".category")
+
+    function loggedIn () {
+        loginBtn.classList.add("hidden")
+        logoutBtn.classList.remove("hidden")
+        category.classList.add("hidden")
+    }
+    function loggedOut () {
+        loginBtn.classList.remove("hidden")
+        logoutBtn.classList.add("hidden")
+        modifier.classList.add("hidden")
+        category.classList.remove("hidden")
+    }
+
+    if (token) {
+        loggedIn()
+    } else {
+        loggedOut()
+    }
+
+    logoutBtn.addEventListener('click', function () {
+        localStorage.removeItem('token')
+        loggedOut()
+    })
+})
+
+// Zone Modale
+function openModal() {
+    let display = ''
+    for (let article of worksCache) {
+        display += `
+            <figure>
+                <img src="${article.imageUrl}" alt="${article.title}">
+                <button class="delete-btn" data-id="${article.id}"><i class="fa-solid fa-trash-can"></i></button>
+            </figure>
+        `
+    }
+    /* console.log(display) */
+    const container = document.querySelector("#edit-gallery")
+    container.innerHTML = ''
+    container.insertAdjacentHTML('beforeend', display)
+    document.querySelector(".editer").style.display = 'flex'
+}
+document.querySelector(".modifier-btn").addEventListener('click', openModal)
+
+document.querySelector(".modifier-btn-close").addEventListener('click', () => {
+    document.querySelector(".editer").style.display = 'none'
+})
