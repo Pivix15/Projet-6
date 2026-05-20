@@ -43,7 +43,7 @@ fetch("http://localhost:5678/api/categories")
     })
     .catch(err => console.log(err))
 
-function filterWorkCategory (filterId) {
+function filterWorkCategory(filterId) {
     console.log("Filtre les categories", filterId)
     let display = ''
     for (let article of worksCache) {
@@ -69,12 +69,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const modifier = document.querySelector(".modifier-btn")
     const category = document.querySelector(".category")
 
-    function loggedIn () {
+    function loggedIn() {
         loginBtn.classList.add("hidden")
         logoutBtn.classList.remove("hidden")
         category.classList.add("hidden")
     }
-    function loggedOut () {
+    function loggedOut() {
         loginBtn.classList.remove("hidden")
         logoutBtn.classList.add("hidden")
         modifier.classList.add("hidden")
@@ -104,11 +104,32 @@ function openModal() {
             </figure>
         `
     }
-    /* console.log(display) */
     const container = document.querySelector("#edit-gallery")
     container.innerHTML = ''
     container.insertAdjacentHTML('beforeend', display)
     document.querySelector(".editer").style.display = 'flex'
+
+    // Delete galery
+    document.querySelectorAll(".delete-btn").forEach(button => {
+        button.addEventListener('click', () => {
+            const id = button.dataset.id
+            fetch(`http://localhost:5678/api/works/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        button.parentElement.remove()
+                        worksCache = worksCache.filter(article => article.id !== parseInt(id))
+                        /* console.log(worksCache) */
+                        filterWorkCategory(0)
+                    } else {
+                        console.error('Erreur lors de la suppression')
+                    }
+                })
+                .catch(error => console.error('Erreur réseau :', error))
+        })
+    })
 }
 document.querySelector(".modifier-btn").addEventListener('click', openModal)
 
