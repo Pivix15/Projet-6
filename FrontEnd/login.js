@@ -5,7 +5,7 @@ document.getElementById('form').addEventListener('submit', function (e) {
     const password = document.getElementById('password').value
 
     if (!email || !password) {
-        alert("Veuillez remplir tous les champs")
+        document.getElementById("error-message").textContent = "Veuillez remplir tous les champs"
         
     } else {
         fetch("http://localhost:5678/api/users/login", {
@@ -22,7 +22,7 @@ document.getElementById('form').addEventListener('submit', function (e) {
                     localStorage.setItem('token', data.token)
                     window.location.href = "index.html"
                 } else {
-                    alert("Email ou mot de passe incorrect")
+                    document.getElementById("error-message").textContent = "Email ou mot de passe incorrect"
                 }
             })
             .catch(err => console.log(err))

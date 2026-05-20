@@ -234,6 +234,10 @@ li a:hover {
 .hidden {
 	display: none;
 }
+#error-message {
+	color: red;
+	margin-top: 1rem;
+}
 /* === MODALE === */
 .editer {
   position: fixed;
