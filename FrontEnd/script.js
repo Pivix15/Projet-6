@@ -108,6 +108,7 @@ function openModal() {
     container.innerHTML = ''
     container.insertAdjacentHTML('beforeend', display)
     document.querySelector(".editer").style.display = 'flex'
+    document.getElementById("add-img-form").style.display = 'none'
 
     // Delete galery
     document.querySelectorAll(".delete-btn").forEach(button => {
@@ -135,4 +136,23 @@ document.querySelector(".modifier-btn").addEventListener('click', openModal)
 
 document.querySelector(".modifier-btn-close").addEventListener('click', () => {
     document.querySelector(".editer").style.display = 'none'
+})
+
+// Ajout Photo
+document.getElementById("btn-add-img").addEventListener('click', () => {
+    document.getElementById("edit-gallery").classList.add("hidden")
+    document.getElementById("modal-title").textContent = "Ajout photo"
+    document.getElementById("add-img-form").style.display = 'flex'
+    document.getElementById("modal-return").classList.remove("hidden")
+    document.getElementById("btn-add-img").style.display = 'none'
+    document.getElementById("hr").classList.add("hidden")
+})
+
+document.getElementById("modal-return").addEventListener('click', () => {
+    document.getElementById("edit-gallery").classList.remove("hidden")
+    document.getElementById("modal-title").textContent = "Galerie photo"
+    document.getElementById("add-img-form").style.display = 'none'
+    document.getElementById("modal-return").classList.add("hidden")
+    document.getElementById("btn-add-img").style.display = 'block'
+    document.getElementById("hr").classList.remove("hidden")
 })

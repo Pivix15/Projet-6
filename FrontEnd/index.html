@@ -71,9 +71,25 @@
 <aside class="editer" style="display: none;">
 		<div class="editer-wrapper">
 			<button class="modifier-btn-close"><i class="fa-solid fa-x"></i></button>
-			<h2>Galerie photo</h2>
+			<button id="modal-return" class="hidden"><i class="fa-solid fa-arrow-left"></i></button>
+			<h2 id="modal-title">Galerie photo</h2>
+			<form id="add-img-form" class="hidden">
+				<div class="update-zone">
+					<i class="fa-regular fa-image"></i>
+					<label for="image">+ Ajouter photo</label>
+					<input type="file" id="image" accept=".jpg,.png">
+					<span class="upload-hint">Jpg, png : 4mo max</span>
+				</div>
+				<label for="title">Titre</label>
+				<input type="text" id="title">
+				<label for="category-img">Catégorie</label>
+				<select id="category-img"></select>
+				<hr>
+				<button type="submit">Valider</button>
+			</form>
 			<div id="edit-gallery"></div>
-			<button>Ajouter une photo</button>
+			<hr id="hr">
+			<button id="btn-add-img">Ajouter une photo</button>
 		</div>
 </aside>
 <script src="script.js"></script>
